@@ -1,0 +1,7 @@
+C:\Projects\SimpleWebCrawler\WebCrawlerService\bin\Debug\netstandard1.4\WebCrawlerService.deps.json
+C:\Projects\SimpleWebCrawler\WebCrawlerService\obj\Debug\netstandard1.4\WebCrawlerService.AssemblyInfo.cs
+C:\Projects\SimpleWebCrawler\WebCrawlerService\bin\Debug\netstandard1.4\WebCrawlerService.dll
+C:\Projects\SimpleWebCrawler\WebCrawlerService\bin\Debug\netstandard1.4\WebCrawlerService.pdb
+C:\Projects\SimpleWebCrawler\WebCrawlerService\obj\Debug\netstandard1.4\WebCrawlerService.dll
+C:\Projects\SimpleWebCrawler\WebCrawlerService\obj\Debug\netstandard1.4\WebCrawlerService.pdb
+C:\Projects\SimpleWebCrawler\WebCrawlerService\obj\Debug\netstandard1.4\WebCrawlerService.csprojResolveAssemblyReference.cache

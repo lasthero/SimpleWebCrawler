@@ -1,0 +1,16 @@
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Test\bin\Debug\netcoreapp1.1\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Test\bin\Debug\netcoreapp1.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Test\bin\Debug\netcoreapp1.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Test\bin\Debug\netcoreapp1.1\SimpleWebCrawler.Test.deps.json
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Test\bin\Debug\netcoreapp1.1\SimpleWebCrawler.Test.runtimeconfig.json
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Test\bin\Debug\netcoreapp1.1\SimpleWebCrawler.Test.runtimeconfig.dev.json
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Test\bin\Debug\netcoreapp1.1\SimpleWebCrawler.Test.dll
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Test\bin\Debug\netcoreapp1.1\SimpleWebCrawler.Test.pdb
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Test\bin\Debug\netcoreapp1.1\SimpleWebCrawler.Services.dll
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Test\bin\Debug\netcoreapp1.1\SimpleWebCrawler.Services.pdb
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Test\obj\Debug\netcoreapp1.1\SimpleWebCrawler.Test.AssemblyInfo.cs
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Test\obj\Debug\netcoreapp1.1\SimpleWebCrawler.Test.dll
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Test\obj\Debug\netcoreapp1.1\SimpleWebCrawler.Test.pdb
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Test\obj\Debug\netcoreapp1.1\SimpleWebCrawler.Test.csprojResolveAssemblyReference.cache
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Test\obj\Debug\netcoreapp1.1\SimpleWebCrawler.Test.csproj.CoreCompileInputs.cache
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Test\obj\Debug\netcoreapp1.1\SimpleWebCrawler.Test.AssemblyInfoInputs.cache
