@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.1",
-    "signature": "f5a5c965e4270e12ec2fa9058f9a79ba2fad32ea"
+    "signature": "b9f71855ee9679c1076c5fd04d13541d58804aa6"
   },
   "compilationOptions": {},
   "targets": {
@@ -17,6 +17,16 @@
           "SimpleWebCrawler.Test.dll": {}
         }
       },
+      "htmlagilitypack/1.7.1": {
+        "dependencies": {
+          "System.Xml.XPath": "4.3.0",
+          "System.Xml.XPath.XmlDocument": "4.3.0",
+          "System.Xml.XmlDocument": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.6/HtmlAgilityPack.dll": {}
+        }
+      },
       "microsoft.net.test.sdk/15.0.0": {
         "dependencies": {
           "Microsoft.TestPlatform.TestHost": "15.0.0"
@@ -30,7 +40,7 @@
           "System.Diagnostics.TraceSource": "4.0.0",
           "System.Runtime.Serialization.Json": "4.0.2",
           "System.Runtime.Serialization.Primitives": "4.1.1",
-          "System.Xml.XPath.XmlDocument": "4.0.1"
+          "System.Xml.XPath.XmlDocument": "4.3.0"
         },
         "runtime": {
           "lib/netstandard1.5/Microsoft.TestPlatform.CoreUtilities.dll": {},
@@ -319,6 +329,7 @@
       "system.private.datacontractserialization/4.1.1": {
         "dependencies": {
           "System.Runtime.Serialization.Primitives": "4.1.1",
+          "System.Xml.XmlDocument": "4.3.0",
           "System.Xml.XmlSerializer": "4.0.11"
         },
         "runtime": {
@@ -338,17 +349,37 @@
           "lib/netstandard1.3/System.Runtime.Serialization.Primitives.dll": {}
         }
       },
+      "system.xml.xmldocument/4.3.0": {
+        "runtime": {
+          "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
+        }
+      },
       "system.xml.xmlserializer/4.0.11": {
+        "dependencies": {
+          "System.Xml.XmlDocument": "4.3.0"
+        },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "system.xml.xpath.xmldocument/4.0.1": {
+      "system.xml.xpath/4.3.0": {
+        "runtime": {
+          "lib/netstandard1.3/System.Xml.XPath.dll": {}
+        }
+      },
+      "system.xml.xpath.xmldocument/4.3.0": {
+        "dependencies": {
+          "System.Xml.XPath": "4.3.0",
+          "System.Xml.XmlDocument": "4.3.0"
+        },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
       "simplewebcrawler.services/1.0.0": {
+        "dependencies": {
+          "HtmlAgilityPack": "1.7.1"
+        },
         "runtime": {
           "SimpleWebCrawler.Services.dll": {}
         }
@@ -360,6 +391,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "htmlagilitypack/1.7.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-380bHQIC4eHZY/8jmtRA26jdHr2IcImiOCrKXPi14ASj+Oz2W7etrL+OHRuNb6qvVyeLIpkpPxHBBWo0AGy6jA==",
+      "path": "htmlagilitypack/1.7.1",
+      "hashPath": "htmlagilitypack.1.7.1.nupkg.sha512"
     },
     "microsoft.net.test.sdk/15.0.0": {
       "type": "package",
@@ -473,6 +511,13 @@
       "path": "system.runtime.serialization.primitives/4.1.1",
       "hashPath": "system.runtime.serialization.primitives.4.1.1.nupkg.sha512"
     },
+    "system.xml.xmldocument/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lJ8AxvkX7GQxpC6GFCeBj8ThYVyQczx2+f/cWHJU8tjS7YfI6Cv6bon70jVEgs2CiFbmmM8b9j1oZVx0dSI2Ww==",
+      "path": "system.xml.xmldocument/4.3.0",
+      "hashPath": "system.xml.xmldocument.4.3.0.nupkg.sha512"
+    },
     "system.xml.xmlserializer/4.0.11": {
       "type": "package",
       "serviceable": true,
@@ -480,12 +525,19 @@
       "path": "system.xml.xmlserializer/4.0.11",
       "hashPath": "system.xml.xmlserializer.4.0.11.nupkg.sha512"
     },
-    "system.xml.xpath.xmldocument/4.0.1": {
+    "system.xml.xpath/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Zm2BdeanuncYs3NhCj4c9e1x3EXFzFBVv2wPEc/Dj4ZbI9R8ecLSR5frAsx4zJCPBtKQreQ7Q/KxJEohJZbfzA==",
-      "path": "system.xml.xpath.xmldocument/4.0.1",
-      "hashPath": "system.xml.xpath.xmldocument.4.0.1.nupkg.sha512"
+      "sha512": "sha512-v1JQ5SETnQusqmS3RwStF7vwQ3L02imIzl++sewmt23VGygix04pEH+FCj1yWb+z4GDzKiljr1W7Wfvrx0YwgA==",
+      "path": "system.xml.xpath/4.3.0",
+      "hashPath": "system.xml.xpath.4.3.0.nupkg.sha512"
+    },
+    "system.xml.xpath.xmldocument/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-A/uxsWi/Ifzkmd4ArTLISMbfFs6XpRPsXZonrIqyTY70xi8t+mDtvSM5Os0RqyRDobjMBwIDHDL4NOIbkDwf7A==",
+      "path": "system.xml.xpath.xmldocument/4.3.0",
+      "hashPath": "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
     },
     "simplewebcrawler.services/1.0.0": {
       "type": "project",

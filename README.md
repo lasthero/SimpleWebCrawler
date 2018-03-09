@@ -1,2 +1,1 @@
-# SimpleWebCrawler
-A simple web crawler
+# Simple Web Crawler

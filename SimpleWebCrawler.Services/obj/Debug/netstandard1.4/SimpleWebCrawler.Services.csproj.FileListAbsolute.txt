@@ -4,5 +4,3 @@ C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Services\bin\Debug\netstandard1.4\
 C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Services\obj\Debug\netstandard1.4\SimpleWebCrawler.Services.AssemblyInfo.cs
 C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Services\obj\Debug\netstandard1.4\SimpleWebCrawler.Services.dll
 C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Services\obj\Debug\netstandard1.4\SimpleWebCrawler.Services.pdb
-C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Services\obj\Debug\netstandard1.4\SimpleWebCrawler.Services.csproj.CoreCompileInputs.cache
-C:\Projects\SimpleWebCrawler\SimpleWebCrawler.Services\obj\Debug\netstandard1.4\SimpleWebCrawler.Services.AssemblyInfoInputs.cache

@@ -4,17 +4,20 @@ namespace SimpleWebCrawler.Services
 {
     public class WebCrawlerService
     {
-        public bool Run(string url){
-           if (!string.IsNullOrEmpty(url) && this.IsValidUrl(url))
+        public bool Run(string url)
+        {
+           var uri = this.GetUri(url);
+           if (!string.IsNullOrEmpty(url) && uri != null)
             return true;
 
             return false;
         }
 
-        private bool IsValidUrl(string url)
+        private Uri GetUri(string url)
         {
             Uri result;
-            return Uri.TryCreate(url, UriKind.Absolute, out result);
+            Uri.TryCreate(url, UriKind.Absolute, out result);
+            return result;
         }
     }
 }
