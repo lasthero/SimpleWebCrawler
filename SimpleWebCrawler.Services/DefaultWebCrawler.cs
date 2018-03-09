@@ -30,31 +30,36 @@ namespace SimpleWebCrawler.Services
         {
             if (this.WebUri == null)
                 return null;
-            var parsedHtmlDoc = new WebCrawlerHtmlDocument(this.WebUri);
-
+            
             HtmlWeb web = new HtmlWeb();
             var htmlDoc = web.Load(this.WebUri);
-
-            var links = htmlDoc.DocumentNode.SelectSingleNode("//body").SelectNodes("//a").Select(e=>e.GetAttributeValue("href", null)).Where(s=> !string.IsNullOrEmpty(s)).ToList();
-            this.ExtractLinks(parsedHtmlDoc, links);
-            return parsedHtmlDoc;
+            return ParseHtmlDoc(htmlDoc);
         }
 
-        private void ExtractLinks(WebCrawlerHtmlDocument parsedHtmlDoc, IList<string> links)
+        private WebCrawlerHtmlDocument ParseHtmlDoc(HtmlDocument htmlDoc)
         {
+            var parsedHtmlDoc = new WebCrawlerHtmlDocument(this.WebUri);
+            var links = htmlDoc.DocumentNode.SelectSingleNode("//body").SelectNodes("//a").Select(e => e.GetAttributeValue("href", null)).Where(s => !string.IsNullOrEmpty(s)).GroupBy(a=>a).Select(a=>a.Key).ToList();
             Uri uri;
             foreach (var link in links)
             {
                 if (Uri.TryCreate(link, UriKind.Absolute, out uri))
                 {
-                    parsedHtmlDoc.AddLink(new WebCrawlerHtmlLink(){ Url=uri.AbsoluteUri, IsExternal = (uri.Host!=this.WebUri.Host) });
+                    if (uri.Host != this.WebUri.Host) //external links
+                    {
+                        parsedHtmlDoc.AddExternalLink(uri);
+                    }
+                    else // links to internal pages
+                    {
+                        parsedHtmlDoc.AddNode(new WebCrawlerHtmlDocument(uri));
+                    }
                 }
                 else
                 {
                     //log errors
                 }
-                    
             }
+            return parsedHtmlDoc;
         }
     }
 }

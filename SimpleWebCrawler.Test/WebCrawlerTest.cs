@@ -24,7 +24,8 @@ namespace SimpleWebCrawler.Test
         [TestMethod]
         public void ShouldReturnSimpleWebDocument()
         {
-            var url = "http://wiprodigital.com/";
+            //var url = "http://wiprodigital.com/";
+            var url = "http://iot.wiprodigital.com/";
             var uri = new Uri(url);
             DefaultWebCrawler crawler = new DefaultWebCrawler(uri);
             WebCrawlerHtmlDocument doc = crawler.Craw();

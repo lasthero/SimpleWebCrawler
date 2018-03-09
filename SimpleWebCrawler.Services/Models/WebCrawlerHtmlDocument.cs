@@ -9,19 +9,26 @@ namespace SimpleWebCrawler.Services.Models
     {
         public Uri Uri { get; private set; }
         public HashSet<string> StaticContents { get; private set; }
-        public IDictionary<string, WebCrawlerHtmlLink> Links { get; private set; }
+        public HashSet<string> ExternalLinks { get; private set; }
+        public IList<WebCrawlerHtmlDocument> Nodes { get; private set; }
 
         public WebCrawlerHtmlDocument(Uri uri)
         {
             this.Uri = uri;
             this.StaticContents = new HashSet<string>();
-            this.Links = new Dictionary<string, WebCrawlerHtmlLink>();
+            this.ExternalLinks = new HashSet<string>();
+            this.Nodes = new List<WebCrawlerHtmlDocument>();
         }
 
-        public void AddLink(WebCrawlerHtmlLink link)
+        public void AddNode(WebCrawlerHtmlDocument node)
         {
-            if (!this.Links.ContainsKey(link.Url))
-                this.Links.Add(link.Url, link);
+            this.Nodes.Add(node);
+        }
+
+        public void AddExternalLink(Uri link)
+        {
+            if (!this.ExternalLinks.Contains(link.AbsoluteUri))
+                this.ExternalLinks.Add(link.AbsoluteUri);
         }
 
         public void AddStaticContent(string content)
@@ -30,9 +37,9 @@ namespace SimpleWebCrawler.Services.Models
                 this.StaticContents.Add(content);
         }
 
-        public IList<String> GetLinkList(bool isExternal)
+        public IList<String> GetInternalLinkList()
         {
-            return this.Links.Values.Where(a => a.IsExternal == isExternal).Select(a=>a.Url).ToList();
+            return this.Nodes.Select(a=>a.Uri.AbsoluteUri).ToList();
         }
     }
 }
