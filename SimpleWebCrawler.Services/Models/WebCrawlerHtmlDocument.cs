@@ -7,6 +7,7 @@ namespace SimpleWebCrawler.Services.Models
 {
     public class WebCrawlerHtmlDocument
     {
+        
         public Uri Uri { get; private set; }
         public HashSet<string> StaticContents { get; private set; }
         public HashSet<string> ExternalLinks { get; private set; }
@@ -40,6 +41,16 @@ namespace SimpleWebCrawler.Services.Models
         public IList<String> GetInternalLinkList()
         {
             return this.Nodes.Select(a=>a.Uri.AbsoluteUri).ToList();
+        }
+        
+        public override bool Equals(object obj)
+        {
+            return this.Uri.AbsoluteUri == ((WebCrawlerHtmlDocument) obj).Uri.AbsoluteUri;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Uri.GetHashCode();
         }
     }
 }

@@ -17,20 +17,19 @@ namespace SimpleWebCrawler.Test
         public void ShouldReturnNullForEmptyUrl()
         {
             DefaultWebCrawler crawler = new DefaultWebCrawler((Uri)null);
-            WebCrawlerHtmlDocument doc = crawler.Craw();
-            Assert.IsNull(doc);
+            var result = crawler.Craw();
+            Assert.IsNull(result);
         }
 
         [TestMethod]
-        public void ShouldReturnSimpleWebDocument()
+        public void ShouldReturnResult()
         {
-            //var url = "http://wiprodigital.com/";
-            var url = "http://iot.wiprodigital.com/";
+            var url = "http://wiprodigital.com/";
+            //var url = "http://iot.wiprodigital.com/";
             var uri = new Uri(url);
             DefaultWebCrawler crawler = new DefaultWebCrawler(uri);
-            WebCrawlerHtmlDocument doc = crawler.Craw();
-            Assert.IsNotNull(doc);
-            Assert.AreEqual(uri.AbsoluteUri, doc.Uri.AbsoluteUri);
+            var result = crawler.Craw();
+            Assert.IsNotNull(result);
         }
     }
 }

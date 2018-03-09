@@ -1,23 +1,17 @@
 using System;
+using System.Collections.Generic;
+using SimpleWebCrawler.Services.Models;
 
 namespace SimpleWebCrawler.Services
 {
     public class WebCrawlerService
     {
-        public bool Run(string url)
+        public IList<ParsedHtmlDocumentResult> Run(Uri uri)
         {
-           var uri = this.GetUri(url);
-           if (!string.IsNullOrEmpty(url) && uri != null)
-            return true;
+           if (uri == null)
+            return null;
 
-            return false;
-        }
-
-        private Uri GetUri(string url)
-        {
-            Uri result;
-            Uri.TryCreate(url, UriKind.Absolute, out result);
-            return result;
+            return new DefaultWebCrawler(uri).Craw();
         }
     }
 }

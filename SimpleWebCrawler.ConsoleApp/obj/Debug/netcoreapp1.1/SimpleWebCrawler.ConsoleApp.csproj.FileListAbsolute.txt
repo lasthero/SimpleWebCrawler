@@ -1,0 +1,13 @@
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\bin\Debug\netcoreapp1.1\SimpleWebCrawler.ConsoleApp.deps.json
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\bin\Debug\netcoreapp1.1\SimpleWebCrawler.ConsoleApp.runtimeconfig.json
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\bin\Debug\netcoreapp1.1\SimpleWebCrawler.ConsoleApp.runtimeconfig.dev.json
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\bin\Debug\netcoreapp1.1\SimpleWebCrawler.ConsoleApp.dll
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\bin\Debug\netcoreapp1.1\SimpleWebCrawler.ConsoleApp.pdb
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\bin\Debug\netcoreapp1.1\SimpleWebCrawler.Services.dll
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\bin\Debug\netcoreapp1.1\SimpleWebCrawler.Services.pdb
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp1.1\SimpleWebCrawler.ConsoleApp.csprojResolveAssemblyReference.cache
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp1.1\SimpleWebCrawler.ConsoleApp.AssemblyInfo.cs
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp1.1\SimpleWebCrawler.ConsoleApp.dll
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp1.1\SimpleWebCrawler.ConsoleApp.pdb
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp1.1\SimpleWebCrawler.ConsoleApp.csproj.CoreCompileInputs.cache
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp1.1\SimpleWebCrawler.ConsoleApp.AssemblyInfoInputs.cache

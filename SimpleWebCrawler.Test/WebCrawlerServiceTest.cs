@@ -17,21 +17,20 @@ namespace SimpleWebCrawler.Test
         }
 
         [TestMethod]
-        public void ShouldReturnTrue_ValidUrl()
+        public void ShouldReturnResult_ValidUrl()
         {
             var validUrl = "https://wiprodigital.com/";
-            var result = _service.Run(validUrl);
+            var result = _service.Run(new Uri(validUrl));
             
-            Assert.IsTrue(result, "Valid urls should return true");
+            Assert.IsTrue(result!=null, "Valid urls should return true");
         }
 
         [TestMethod]
-        public void ShouldReturnFalse_InvalidUrl()
+        public void ShouldReturnNull_InvalidUrl()
         {
-            var invalidUrl = "abc";
-            var result = _service.Run(invalidUrl);
+            var result = _service.Run(null);
 
-            Assert.IsFalse(result, "Invalid urls should return false");
+            Assert.IsFalse(result!=null, "Invalid urls should return false");
         }
     }
 }

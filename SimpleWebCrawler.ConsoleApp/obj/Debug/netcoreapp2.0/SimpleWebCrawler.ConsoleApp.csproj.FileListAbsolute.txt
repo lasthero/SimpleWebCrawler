@@ -1,0 +1,5 @@
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\bin\Debug\netcoreapp2.0\SimpleWebCrawler.ConsoleApp.deps.json
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\bin\Debug\netcoreapp2.0\SimpleWebCrawler.ConsoleApp.runtimeconfig.json
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\bin\Debug\netcoreapp2.0\SimpleWebCrawler.ConsoleApp.runtimeconfig.dev.json
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp2.0\SimpleWebCrawler.ConsoleApp.csprojResolveAssemblyReference.cache
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp2.0\SimpleWebCrawler.ConsoleApp.AssemblyInfo.cs

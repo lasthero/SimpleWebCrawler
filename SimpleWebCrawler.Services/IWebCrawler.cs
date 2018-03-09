@@ -8,6 +8,6 @@ namespace SimpleWebCrawler.Services
 {
     interface IWebCrawler
     {
-        WebCrawlerHtmlDocument Craw();
+        IList<ParsedHtmlDocumentResult> Craw();
     }
 }
