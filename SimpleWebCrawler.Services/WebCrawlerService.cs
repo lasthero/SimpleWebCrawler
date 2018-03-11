@@ -6,11 +6,8 @@ namespace SimpleWebCrawler.Services
 {
     public class WebCrawlerService
     {
-        public IList<ParsedHtmlDocumentResult> Run(Uri uri)
+        public IEnumerable<ParsedHtmlDocumentResult> Run(Uri uri)
         {
-           if (uri == null)
-            return null;
-
             return new DefaultWebCrawler(uri).Craw();
         }
     }

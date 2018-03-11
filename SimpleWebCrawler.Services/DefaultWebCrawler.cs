@@ -17,48 +17,50 @@ namespace SimpleWebCrawler.Services
         {
             this.WebUri = uri;
         }
-
-        public DefaultWebCrawler(string url)
+        
+        public IEnumerable<ParsedHtmlDocumentResult> Craw()
         {
-            Uri uri;
-            if (!Uri.TryCreate(url, UriKind.Absolute, out uri))
-                throw new Exception("Invalid URL");
-            this.WebUri = uri;
-        }
-
-        public IList<ParsedHtmlDocumentResult> Craw()
-        {
-            if (this.WebUri == null)
-                return null;
+            HashSet<string> errors = new HashSet<string>();
             IDictionary<Uri, ParsedHtmlDocumentResult> visitedPages = new Dictionary<Uri, ParsedHtmlDocumentResult>();
             Queue<Uri> queue = new Queue<Uri>();
+            Uri uri;
+            // Test if the url is active
+            var responseUri = WebCrawlerUtil.GetResponseUri(this.WebUri);
+            if (responseUri == null)
+                throw new Exception(string.Format("The URL is either invalid or not found: {0}", this.WebUri.AbsoluteUri));
+            this.WebUri = responseUri;
+
             //Start from the main page
-            
             var parsedHtmlDoc = this.ParseHtmlDoc(this.WebUri);
             visitedPages.Add(this.WebUri, parsedHtmlDoc);
-            foreach (var childLink in parsedHtmlDoc.InternalLinks)
-            {
-                var newUri = new Uri(childLink);
-                if (!queue.Contains(newUri))
-                    queue.Enqueue(newUri);
-            }
+            yield return parsedHtmlDoc;
 
+            foreach (var link in parsedHtmlDoc.InternalLinks)
+            {
+                if (Uri.TryCreate(link, UriKind.Absolute, out uri) && !queue.Contains(uri))
+                {
+                    queue.Enqueue(uri);
+                }
+            }
+            //Process queue
             while (queue.Count > 0)
             {
                 var item = queue.Dequeue();
                 if (!visitedPages.ContainsKey(item))
                 {
-                    var parsedPage = this.ParseHtmlDoc(item);
-                    visitedPages.Add(item, parsedPage);
-                    foreach (var link in parsedPage.InternalLinks)
+                    parsedHtmlDoc = this.ParseHtmlDoc(item);
+                    visitedPages.Add(item, parsedHtmlDoc);
+                    yield return parsedHtmlDoc;
+                    foreach (var link in parsedHtmlDoc.InternalLinks)
                     {
-                        var newUri = new Uri(link);
-                        if (!queue.Contains(newUri))
-                            queue.Enqueue(newUri);
+                        if (Uri.TryCreate(link, UriKind.Absolute, out uri) && !queue.Contains(uri))
+                        {
+                            queue.Enqueue(uri);
+                        }
                     }
                 }
             }
-            return visitedPages.Values.ToList();
+           // return result;
         }
 
         private ParsedHtmlDocumentResult ParseHtmlDoc(Uri uri)

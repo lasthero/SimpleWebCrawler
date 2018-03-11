@@ -7,7 +7,6 @@ namespace SimpleWebCrawler.Services.Models
 {
     public class ParsedHtmlDocumentResult
     {
-        
         public Uri Uri { get; private set; }
         public HashSet<string> StaticContents { get; private set; }
         public HashSet<string> ExternalLinks { get; private set; }

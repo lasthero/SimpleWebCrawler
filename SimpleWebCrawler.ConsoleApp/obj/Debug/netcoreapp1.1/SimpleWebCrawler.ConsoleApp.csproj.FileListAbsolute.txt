@@ -9,5 +9,3 @@ C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp1.1
 C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp1.1\SimpleWebCrawler.ConsoleApp.AssemblyInfo.cs
 C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp1.1\SimpleWebCrawler.ConsoleApp.dll
 C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp1.1\SimpleWebCrawler.ConsoleApp.pdb
-C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp1.1\SimpleWebCrawler.ConsoleApp.csproj.CoreCompileInputs.cache
-C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp1.1\SimpleWebCrawler.ConsoleApp.AssemblyInfoInputs.cache
