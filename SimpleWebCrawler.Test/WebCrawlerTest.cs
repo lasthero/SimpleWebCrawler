@@ -16,11 +16,13 @@ namespace SimpleWebCrawler.Test
         public WebCrawlerTest() { }
 
         [TestMethod]
-        public void ShouldReturnNullForEmptyUrl()
+        [ExpectedException(typeof(NullReferenceException),
+            "A null Uri object is not allowed.")]
+        public void ShouldThrowException_NullUri()
         {
-            DefaultWebCrawler crawler = new DefaultWebCrawler((Uri)null);
+            DefaultWebCrawler crawler = new DefaultWebCrawler(null);
             var result = crawler.Craw();
-            Assert.IsNull(result);
+            foreach (var item in result) { }
         }
 
         [TestMethod]
@@ -41,16 +43,13 @@ namespace SimpleWebCrawler.Test
             Uri uri2;
             Uri.TryCreate("https://wiprodigital.com/who-we-are/", UriKind.Absolute, out uri2);
             Uri uri3;
-            Uri.TryCreate("https://wiprodigital.com/who-we-are", UriKind.Absolute, out uri3);
+            Uri.TryCreate("https://wiprodigital.com/who-we-are/#who-we-are", UriKind.Absolute, out uri3);
 
             Queue<Uri> q = new Queue<Uri>();
             q.Enqueue(uri3);
             
             var a = q.Contains(uri2);
             Assert.AreEqual(uri2, uri3);
-            //Assert.AreEqual(uri2, uri3);
-            //Assert.AreEqual(uri3, uri1);
         }
-
     }
 }

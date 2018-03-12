@@ -22,7 +22,6 @@ namespace SimpleWebCrawler.Services
         {
             IDictionary<Uri, ParsedHtmlDocumentResult> visitedPages = new Dictionary<Uri, ParsedHtmlDocumentResult>();
             Queue<Uri> queue = new Queue<Uri>();
-            Uri uri;
             // Test if the url is active
             var responseUri = WebCrawlerUtil.GetResponseUri(this.WebUri);
             this.WebUri = responseUri ?? throw new Exception(string.Format("The URL is either invalid or not found: {0}", this.WebUri.AbsoluteUri));

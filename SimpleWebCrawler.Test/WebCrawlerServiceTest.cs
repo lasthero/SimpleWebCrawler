@@ -26,11 +26,11 @@ namespace SimpleWebCrawler.Test
         }
 
         [TestMethod]
-        public void ShouldReturnNull_InvalidUrl()
+        [ExpectedException(typeof(Exception))]
+        public void ShouldThrowException_InValidUri()
         {
-            var result = _service.Run(null);
-
-            Assert.IsFalse(result!=null, "Invalid urls should return false");
+            var resut =  _service.Run(new Uri("http://extregegfample.com/"));
+            foreach (var item in resut) { }
         }
     }
 }

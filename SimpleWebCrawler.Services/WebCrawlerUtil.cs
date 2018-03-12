@@ -13,6 +13,8 @@ namespace SimpleWebCrawler.Services
         {
             try
             {
+                if (uri == null)
+                    return null;
                 var request = WebRequest.Create(uri);
                 var response = (HttpWebResponse) request.GetResponse();
                 uri = response.ResponseUri;

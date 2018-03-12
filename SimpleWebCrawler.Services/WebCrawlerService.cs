@@ -4,7 +4,7 @@ using SimpleWebCrawler.Services.Models;
 
 namespace SimpleWebCrawler.Services
 {
-    public class WebCrawlerService
+    public class WebCrawlerService: IWebCrawlerService
     {
         public IEnumerable<ParsedHtmlDocumentResult> Run(Uri uri)
         {

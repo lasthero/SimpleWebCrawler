@@ -5,10 +5,10 @@ C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\bin\Debug\netcoreapp2.0
 C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\bin\Debug\netcoreapp2.0\SimpleWebCrawler.ConsoleApp.pdb
 C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\bin\Debug\netcoreapp2.0\SimpleWebCrawler.Services.dll
 C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\bin\Debug\netcoreapp2.0\SimpleWebCrawler.Services.pdb
-C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp2.0\SimpleWebCrawler.ConsoleApp.csprojResolveAssemblyReference.cache
 C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp2.0\SimpleWebCrawler.ConsoleApp.csproj.CoreCompileInputs.cache
 C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp2.0\SimpleWebCrawler.ConsoleApp.AssemblyInfoInputs.cache
 C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp2.0\SimpleWebCrawler.ConsoleApp.AssemblyInfo.cs
 C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp2.0\SimpleWebCrawler.ConsoleApp.csproj.CopyComplete
 C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp2.0\SimpleWebCrawler.ConsoleApp.dll
 C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp2.0\SimpleWebCrawler.ConsoleApp.pdb
+C:\Projects\SimpleWebCrawler\SimpleWebCrawler.ConsoleApp\obj\Debug\netcoreapp2.0\SimpleWebCrawler.ConsoleApp.csprojResolveAssemblyReference.cache

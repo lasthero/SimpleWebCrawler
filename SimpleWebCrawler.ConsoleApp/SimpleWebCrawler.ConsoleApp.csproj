@@ -9,8 +9,4 @@
     <ProjectReference Include="..\SimpleWebCrawler.Services\SimpleWebCrawler.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="sitemaps\" />
-  </ItemGroup>
-
 </Project>
