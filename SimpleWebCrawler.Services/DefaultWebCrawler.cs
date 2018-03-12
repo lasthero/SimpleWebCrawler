@@ -18,70 +18,86 @@ namespace SimpleWebCrawler.Services
             this.WebUri = uri;
         }
         
+        //Implemented BST for web crawing
         public IEnumerable<ParsedHtmlDocumentResult> Craw()
         {
             IDictionary<Uri, ParsedHtmlDocumentResult> visitedPages = new Dictionary<Uri, ParsedHtmlDocumentResult>();
-            Queue<Uri> queue = new Queue<Uri>();
+            //Page queue stores pages to be visited
+            Queue<Uri> pageQueue = new Queue<Uri>();
             // Test if the url is active
             var responseUri = WebCrawlerUtil.GetResponseUri(this.WebUri);
             this.WebUri = responseUri ?? throw new Exception(string.Format("The URL is either invalid or not found: {0}", this.WebUri.AbsoluteUri));
 
             //Start from the main page
-            var parsedHtmlDoc = this.ParseHtmlDoc(this.WebUri, queue, visitedPages);
+            var parsedHtmlDoc = this.ParseHtmlDoc(this.WebUri, pageQueue, visitedPages);
             visitedPages.Add(this.WebUri, parsedHtmlDoc);
             yield return parsedHtmlDoc;
             
             //Process queue
-            while (queue.Count > 0)
+            while (pageQueue.Count > 0)
             {
-                var item = queue.Dequeue();
+                var item = pageQueue.Dequeue();
                 if (!visitedPages.ContainsKey(item))
                 {
-                    parsedHtmlDoc = this.ParseHtmlDoc(item, queue, visitedPages);
+                    parsedHtmlDoc = this.ParseHtmlDoc(item, pageQueue, visitedPages);
                     visitedPages.Add(item, parsedHtmlDoc);
                     yield return parsedHtmlDoc;
                 }
             }
         }
 
+        //Use HTML agility pack to parse HTML pages; 
+        //if the page is within the same domain and it has not been visited and is not in the queue, add to the queue for processing
         private ParsedHtmlDocumentResult ParseHtmlDoc(Uri uri, Queue<Uri> pageQueue, IDictionary<Uri, ParsedHtmlDocumentResult> visitedPages)
         {
             var web = new HtmlWeb();
             var htmlDoc = web.Load(uri);
             var parsedHtmlDoc = new ParsedHtmlDocumentResult(uri);
-            var nodes = htmlDoc.DocumentNode.SelectNodes("//a[@href] | //link[@rel='stylesheet' and @href] | //img[@src] | //script[@type='text/javascript' and @src='*.js']");
-            if (nodes != null)
+            try
             {
-                foreach (var node in nodes)
+                var nodes = htmlDoc.DocumentNode.SelectNodes(
+                    "//a[@href] | //link[@rel='stylesheet' and @href] | //img[@src] | //script[@type='text/javascript' and @src='*.js']");
+                if (nodes != null)
                 {
-                    var linkUrl = this.GetNodeLink(node);
-                    uri = ConvertToAbsoluteUri(linkUrl, parsedHtmlDoc.Uri);
-                    if (uri != null && uri != this.WebUri && uri != parsedHtmlDoc.Uri)
+                    foreach (var node in nodes)
                     {
-                        if (uri.Host == this.WebUri.Host) //internal links
+                        var linkUrl = this.GetNodeLink(node);
+                        uri = WebCrawlerUtil.ConvertToAbsoluteUri(linkUrl, parsedHtmlDoc.Uri);
+                        if (uri != null && uri != this.WebUri && uri != parsedHtmlDoc.Uri)
                         {
-                            if (node.Name == "a")
+                            if (uri.Host == this.WebUri.Host) //internal links
                             {
-                                if (!visitedPages.ContainsKey(uri) && !pageQueue.Contains(uri))
-                                    pageQueue.Enqueue(uri);
+                                if (node.Name == "a") //links to internal pages
+                                {
+                                    if (!visitedPages.ContainsKey(uri) && !pageQueue.Contains(uri))
+                                        pageQueue.Enqueue(uri);
+                                }
+                                else
+                                    parsedHtmlDoc.AddStaticContent(uri);
                             }
-                            else
-                                parsedHtmlDoc.AddStaticContent(uri);
+                            else // links to external pages
+                            {
+                                parsedHtmlDoc.AddExternalLink(uri);
+                            }
                         }
-                        else // links to external pages
+                        else
                         {
-                            parsedHtmlDoc.AddExternalLink(uri);
+                            //log messages
                         }
-                    }
-                    else
-                    {
-                        //log errors
                     }
                 }
+
+                return parsedHtmlDoc;
             }
-            return parsedHtmlDoc;
+            catch (Exception ex)
+            {
+                parsedHtmlDoc.ErrorMessage = string.Format("Exception occured while peocessing {0}; message: {1}",
+                    parsedHtmlDoc.Uri.AbsoluteUri, ex.Message);
+                return parsedHtmlDoc;
+            }
         }
 
+        //for this implementation, we are only interested at anchor, image, script, and css links 
         private string GetNodeLink(HtmlNode node)
         {
             var returnVal = string.Empty;
@@ -98,25 +114,6 @@ namespace SimpleWebCrawler.Services
             }
 
             return returnVal;
-        }
-
-        private Uri ConvertToAbsoluteUri(string url, Uri baseUri)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(url))
-                    return null;
-                if (url.StartsWith("http://") || url.StartsWith("https://"))
-                    return new Uri(url);
-                else
-                {
-                    return new Uri(baseUri, url);
-                }
-            }
-            catch (Exception)
-            {
-                return null;
-            }
         }
     }
 }

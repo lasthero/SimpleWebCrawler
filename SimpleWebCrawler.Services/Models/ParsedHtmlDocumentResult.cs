@@ -20,6 +20,9 @@ namespace SimpleWebCrawler.Services.Models
         [XmlArrayItem("URL")]
         public HashSet<string> ExternalLinks { get; private set; }
 
+        [XmlIgnore]
+        public string ErrorMessage { get; set; }
+
         public ParsedHtmlDocumentResult()
         {
             this.StaticContents = new HashSet<string>();

@@ -27,6 +27,7 @@ namespace SimpleWebCrawler.ConsoleApp
                     {
                         Stopwatch sw = new Stopwatch();
                         sw.Start();
+                        //setup for xml serialization
                         var rootPath = GetRootPath();
                         if (!Directory.Exists(Path.Combine(rootPath, "sitemaps")))
                         {
@@ -36,18 +37,33 @@ namespace SimpleWebCrawler.ConsoleApp
                             string.Format("{0}_{1:yyyy-MM-dd_HHmmss}.xml", uri.Host, DateTime.Now));
                         XmlSerializer ser = new XmlSerializer(typeof(ParsedHtmlDocumentXmlSerialization));
                         var resultsXmlSerialization = new ParsedHtmlDocumentXmlSerialization();
-
                         TextWriter writer = new StreamWriter(fileName);
+
                         var counter = 0;
+                        IList<string> errorMessages = new List<string>();
                         foreach (var result in new WebCrawlerService().Run(uri))
                         {
-                            DisplayResult(result, ++counter);
-                            resultsXmlSerialization.Pages.Add(result);
+                            if (string.IsNullOrEmpty(result.ErrorMessage))
+                            {
+                                DisplayResult(result, ++counter);
+                                resultsXmlSerialization.Pages.Add(result);
+                            }
+                            else
+                            {
+                                errorMessages.Add(result.ErrorMessage);
+                            }
                         }
 
                         sw.Stop();
                         ser.Serialize(writer, resultsXmlSerialization);
                         writer.Close();
+                        if (errorMessages.Count > 0)
+                        {
+                            Console.WriteLine("Errors occurred during processing:");
+                            foreach (var error in errorMessages)
+                                Console.WriteLine("\t{0}", error);
+                        }
+
                         Console.WriteLine(string.Format("Found total {0} pages", counter));
                         Console.WriteLine(string.Format("Sitemap file was created at {0}", fileName));
                         Console.WriteLine(string.Format("Time elapsed: {0} seconds", sw.Elapsed.TotalSeconds));
@@ -69,7 +85,7 @@ namespace SimpleWebCrawler.ConsoleApp
 
         private static void DisplayResult(ParsedHtmlDocumentResult item, int pageNumber)
         {
-            Console.WriteLine(string.Format("Page #{0}: {1}",pageNumber, item.Uri.AbsoluteUri));
+            Console.WriteLine("Page #{0}: {1}",pageNumber, item.Uri.AbsoluteUri);
             
             Console.WriteLine("\tInternal Static Content");
             foreach (var content in item.StaticContents)
