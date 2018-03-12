@@ -14,7 +14,7 @@ This console App solution was implemented with .NET Core which takes a url from 
  ## Build Instructions
  ### Use command line tool/terminal:
  - To run: At the solution root directory, "cd" into "SimpleWebCrawler.ConsoleApp" then:
- >dotnet run <url>
+ >dotnet run `url`
 
  The url argument needs to be a valid url starting with either "http://" or "https://"; otherwise an error message will show.
  - To run unit tests: under the solution root directory, "cd" into "SimpleWebCrawler.Test" then:
