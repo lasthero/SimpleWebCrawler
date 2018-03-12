@@ -38,10 +38,16 @@ namespace SimpleWebCrawler.Test
         public void TestUri()
         {
             var uri1 = new Uri("http://wiprodigital.com/");
-            var uri2 = new Uri("http://wiprodigital.com");
-            var uri3 = new Uri("https://wiprodigital.com/");
+            Uri uri2;
+            Uri.TryCreate("https://wiprodigital.com/who-we-are/", UriKind.Absolute, out uri2);
+            Uri uri3;
+            Uri.TryCreate("https://wiprodigital.com/who-we-are", UriKind.Absolute, out uri3);
 
-            Assert.AreEqual(uri1, uri2);
+            Queue<Uri> q = new Queue<Uri>();
+            q.Enqueue(uri3);
+            
+            var a = q.Contains(uri2);
+            Assert.AreEqual(uri2, uri3);
             //Assert.AreEqual(uri2, uri3);
             //Assert.AreEqual(uri3, uri1);
         }

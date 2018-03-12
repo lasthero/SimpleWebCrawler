@@ -20,97 +20,103 @@ namespace SimpleWebCrawler.Services
         
         public IEnumerable<ParsedHtmlDocumentResult> Craw()
         {
-            HashSet<string> errors = new HashSet<string>();
             IDictionary<Uri, ParsedHtmlDocumentResult> visitedPages = new Dictionary<Uri, ParsedHtmlDocumentResult>();
             Queue<Uri> queue = new Queue<Uri>();
             Uri uri;
             // Test if the url is active
             var responseUri = WebCrawlerUtil.GetResponseUri(this.WebUri);
-            if (responseUri == null)
-                throw new Exception(string.Format("The URL is either invalid or not found: {0}", this.WebUri.AbsoluteUri));
-            this.WebUri = responseUri;
+            this.WebUri = responseUri ?? throw new Exception(string.Format("The URL is either invalid or not found: {0}", this.WebUri.AbsoluteUri));
 
             //Start from the main page
-            var parsedHtmlDoc = this.ParseHtmlDoc(this.WebUri);
+            var parsedHtmlDoc = this.ParseHtmlDoc(this.WebUri, queue, visitedPages);
             visitedPages.Add(this.WebUri, parsedHtmlDoc);
             yield return parsedHtmlDoc;
-
-            foreach (var link in parsedHtmlDoc.InternalLinks)
-            {
-                if (Uri.TryCreate(link, UriKind.Absolute, out uri) && !queue.Contains(uri))
-                {
-                    queue.Enqueue(uri);
-                }
-            }
+            
             //Process queue
             while (queue.Count > 0)
             {
                 var item = queue.Dequeue();
                 if (!visitedPages.ContainsKey(item))
                 {
-                    parsedHtmlDoc = this.ParseHtmlDoc(item);
+                    parsedHtmlDoc = this.ParseHtmlDoc(item, queue, visitedPages);
                     visitedPages.Add(item, parsedHtmlDoc);
                     yield return parsedHtmlDoc;
-                    foreach (var link in parsedHtmlDoc.InternalLinks)
-                    {
-                        if (Uri.TryCreate(link, UriKind.Absolute, out uri) && !queue.Contains(uri))
-                        {
-                            queue.Enqueue(uri);
-                        }
-                    }
                 }
             }
-           // return result;
         }
 
-        private ParsedHtmlDocumentResult ParseHtmlDoc(Uri uri)
+        private ParsedHtmlDocumentResult ParseHtmlDoc(Uri uri, Queue<Uri> pageQueue, IDictionary<Uri, ParsedHtmlDocumentResult> visitedPages)
         {
             var web = new HtmlWeb();
             var htmlDoc = web.Load(uri);
             var parsedHtmlDoc = new ParsedHtmlDocumentResult(uri);
-            ParseLinks(parsedHtmlDoc, htmlDoc);
-            ParseStaticContents(parsedHtmlDoc, htmlDoc);
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//a[@href] | //link[@rel='stylesheet' and @href] | //img[@src] | //script[@type='text/javascript' and @src='*.js']");
+            if (nodes != null)
+            {
+                foreach (var node in nodes)
+                {
+                    var linkUrl = this.GetNodeLink(node);
+                    uri = ConvertToAbsoluteUri(linkUrl, parsedHtmlDoc.Uri);
+                    if (uri != null && uri != this.WebUri && uri != parsedHtmlDoc.Uri)
+                    {
+                        if (uri.Host == this.WebUri.Host) //internal links
+                        {
+                            if (node.Name == "a")
+                            {
+                                if (!visitedPages.ContainsKey(uri) && !pageQueue.Contains(uri))
+                                    pageQueue.Enqueue(uri);
+                            }
+                            else
+                                parsedHtmlDoc.AddStaticContent(uri);
+                        }
+                        else // links to external pages
+                        {
+                            parsedHtmlDoc.AddExternalLink(uri);
+                        }
+                    }
+                    else
+                    {
+                        //log errors
+                    }
+                }
+            }
             return parsedHtmlDoc;
         }
 
-        private void ParseLinks(ParsedHtmlDocumentResult parsedHtmlDoc, HtmlDocument htmlDoc)
+        private string GetNodeLink(HtmlNode node)
         {
-            //Use Group By to elimate duplicates
-            var links = htmlDoc.DocumentNode.SelectSingleNode("//body").SelectNodes("//a")
-                .Select(e => e.GetAttributeValue("href", null)).Where(s => !string.IsNullOrEmpty(s)).GroupBy(a => a)
-                .Select(a => a.Key).ToList();
-            Uri uri;
-            foreach (var link in links)
+            var returnVal = string.Empty;
+            switch (node.Name)
             {
-                if (Uri.TryCreate(link, UriKind.Absolute, out uri) && uri != this.WebUri)
-                {
-                    if (uri.Host != this.WebUri.Host) //external links
-                    {
-                        parsedHtmlDoc.AddExternalLink(uri);
-                    }
-                    else // links to internal pages
-                    {
-                        parsedHtmlDoc.AddInternalLink(uri);
-                    }
-                }
-                else
-                {
-                    //log errors
-                }
+                case "img":
+                case "script":
+                    returnVal = node.Attributes["src"] != null ? node.Attributes["src"].Value : string.Empty;
+                    break;
+                case "a":
+                case "link":
+                    returnVal = node.Attributes["href"] != null? node.Attributes["href"].Value : string.Empty;
+                    break;
             }
+
+            return returnVal;
         }
 
-        private void ParseStaticContents(ParsedHtmlDocumentResult parsedHtmlDoc, HtmlDocument htmlDoc)
+        private Uri ConvertToAbsoluteUri(string url, Uri baseUri)
         {
-            //get static images, .css, and .js
-            var imageUrls = htmlDoc.DocumentNode.Descendants("img")
-                .Select(e => e.GetAttributeValue("src", null))
-                .Where(s => !string.IsNullOrEmpty(s)).Distinct();
-            foreach (var img in imageUrls)
+            try
             {
-                Uri uri;
-                if (Uri.TryCreate(img, UriKind.Absolute, out uri) && uri.Host == this.WebUri.Host)
-                    parsedHtmlDoc.AddStaticContent(uri.AbsoluteUri);
+                if (string.IsNullOrEmpty(url))
+                    return null;
+                if (url.StartsWith("http://") || url.StartsWith("https://"))
+                    return new Uri(url);
+                else
+                {
+                    return new Uri(baseUri, url);
+                }
+            }
+            catch (Exception)
+            {
+                return null;
             }
         }
     }
