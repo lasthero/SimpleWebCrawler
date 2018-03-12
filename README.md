@@ -3,7 +3,7 @@ This is my implementation of a simple web crawler which will visit all pages wit
 https://en.wikipedia.org/wiki/Breadth-first_search
 
 ## Architecture
-This console App solution was implemented with .NET Core which takes a url from command line argument then outputs results to console as it craws web pages then eventually writes all results to a XMl file under the "sitemap" folder of the console App. 
+This console App solution was implemented with .NET Core which takes a url from command line argument then outputs results to console as it craws web pages then eventually writes all results to a XMl file under the "sitemaps" folder. 
  
  ## Prerequisites
  - The latest .NET Core SDK is required in order to build and run this application:
@@ -21,7 +21,7 @@ This console App solution was implemented with .NET Core which takes a url from 
  >dotnet test
 
  ## Future Improvements 
-  - I used TDD approach to get my self started, however more thorough unit tests need to be added and a mock framework with Dependency Injection can be considered as well.
+  - I used TDD approach to get myself started, however more thorough unit tests need to be added and a mock framework with Dependency Injection can be considered as well.
   - Duplicated pages with and without trailing forward slash '/' at the end of url are considered different(e.g. 'https://wiprodigital.com/who-we-are' and '"https://wiprodigital.com/who-we-are/'); as a result both will be processed. I'd like to do more research and address this issue if I have more time. More information about this issue:
   (https://webmasters.googleblog.com/2010/04/to-slash-or-not-to-slash.html) 
   - More error handling: 

@@ -49,6 +49,7 @@ namespace SimpleWebCrawler.ConsoleApp
                         ser.Serialize(writer, resultsXmlSerialization);
                         writer.Close();
                         Console.WriteLine(string.Format("Found total {0} pages", counter));
+                        Console.WriteLine(string.Format("Sitemap file was created at {0}", fileName));
                         Console.WriteLine(string.Format("Time elapsed: {0} seconds", sw.Elapsed.TotalSeconds));
                     }
                     catch (Exception e)
@@ -81,11 +82,7 @@ namespace SimpleWebCrawler.ConsoleApp
 
         private static string GetRootPath()
         {
-            var debugPath = string.Empty;
-#if (DEBUG)
-            debugPath = "..\\..\\..\\";
-#endif
-            return Path.Combine(Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().GetName().CodeBase).LocalPath), debugPath);
+            return Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().GetName().CodeBase).LocalPath);
         }
     }
 }
