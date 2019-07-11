@@ -31,3 +31,4 @@ This console App solution was implemented with .NET Core which takes a url from 
   - More error handling and logging: 
   Test for if the link is alive before visiting (There's a performance concern, however). Also I'd like to write processing messages(summary, errors, exception,..) into logs for trouble shooting.
   - Thinking much further, each web site can potentially contain thousands of pages therefore performance can be slow. To future imporvements, results can be stored at a data store and a cache mechanism can be used. 
+  - Self-contained unit tests
